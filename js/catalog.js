@@ -1,7 +1,3 @@
-// ===============================
-// js/catalog.js — Рендер каталога, поиск, фильтрация, сортировка
-// ===============================
-
 // Состояние каталога
 const catalogState = {
   query: '',
@@ -29,10 +25,7 @@ function getCategoryLabel(category) {
 // Создание карточки товара
 // ===============================
 
-function createProductCard(product, options = {}) {
-  const showDescription = options.description !== false;
-  const descriptionType = options.descriptionType || 'short'; // 'short' or 'full'
-
+function createProductCard(product) {
   const card = document.createElement('article');
   card.classList.add('product-card');
   card.dataset.productId = product.id;
@@ -67,18 +60,12 @@ function createProductCard(product, options = {}) {
   title.textContent = product.title;
   link.appendChild(title);
 
-  // Категория
-  const category = document.createElement('p');
-  category.classList.add('product-card__category');
-  category.textContent = getCategoryLabel(product.category);
-  link.appendChild(category);
-
-  // Описание
-  if (showDescription && product.description) {
-    const desc = document.createElement('p');
-    desc.classList.add('product-card__description');
-    desc.textContent = descriptionType === 'full' ? product.description : (product.shortDescription || product.description);
-    link.appendChild(desc);
+  // Описание (полное)
+  if (product.description) {
+    const description = document.createElement('p');
+    description.classList.add('product-card__description');
+    description.textContent = product.description;
+    link.appendChild(description);
   }
 
   // Цена
@@ -133,9 +120,9 @@ function renderProducts(productsToRender) {
     emptyEl.hidden = productsToRender.length > 0;
   }
 
-  // Создание карточек (с кратким описанием)
+  // Создание карточек
   productsToRender.forEach((product) => {
-    const card = createProductCard(product, { descriptionType: 'short' });
+    const card = createProductCard(product);
     container.append(card);
   });
 }
@@ -153,8 +140,7 @@ function renderPopularProducts(count) {
   const popular = shuffled.slice(0, count || 3);
 
   popular.forEach((product) => {
-    // На главной — без описания
-    const card = createProductCard(product, { description: false });
+    const card = createProductCard(product);
     container.append(card);
   });
 }
@@ -278,6 +264,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderBtn = document.getElementById('product-order-btn');
     if (orderBtn) {
       orderBtn.dataset.product = product.title;
+      orderBtn.addEventListener('click', () => {
+        const dialog = document.getElementById('order-dialog');
+        const hiddenInput = document.getElementById('selected-product');
+        if (dialog && hiddenInput) {
+          hiddenInput.value = product.title;
+          dialog.showModal();
+        }
+      });
     }
 
     // Сводка для секции JS
