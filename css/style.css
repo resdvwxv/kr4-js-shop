@@ -241,6 +241,18 @@ main {
   gap: inherit;
   text-decoration: none;
   color: inherit;
+  flex: 1;
+}
+
+.product-card > a:hover {
+  color: inherit;
+}
+
+.product-card__short-desc {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  font-style: italic;
 }
 
 .product-card:hover {

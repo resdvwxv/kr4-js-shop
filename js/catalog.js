@@ -34,12 +34,18 @@ function createProductCard(product) {
   card.classList.add('product-card');
   card.dataset.productId = product.id;
 
+  // Ссылка на страницу товара
+  const link = document.createElement('a');
+  link.href = `product.html?id=${product.id}`;
+  link.className = 'product-card__link';
+  link.setAttribute('aria-label', `${product.title} — ${formatPrice(product.price)}`);
+
   // Бейдж (Хит / Новинка / Скидка)
   if (product.badge) {
     const badge = document.createElement('span');
     badge.classList.add('product-card__badge');
     badge.textContent = product.badge;
-    card.prepend(badge);
+    card.appendChild(badge);
   }
 
   // Изображение
@@ -49,35 +55,35 @@ function createProductCard(product) {
     img.src = product.image;
     img.alt = product.title;
     img.loading = 'lazy';
-    card.appendChild(img);
+    link.appendChild(img);
   }
 
   // Название
   const title = document.createElement('h3');
   title.classList.add('product-card__title');
   title.textContent = product.title;
-  card.appendChild(title);
+  link.appendChild(title);
 
-  // Описание
-  if (product.description) {
-    const description = document.createElement('p');
-    description.classList.add('product-card__description');
-    description.textContent = product.description;
-    card.appendChild(description);
+  // Краткое описание (для каталога)
+  if (product.shortDescription) {
+    const shortDesc = document.createElement('p');
+    shortDesc.classList.add('product-card__short-desc');
+    shortDesc.textContent = product.shortDescription;
+    link.appendChild(shortDesc);
   }
 
   // Цена
   const price = document.createElement('p');
   price.classList.add('product-card__price');
   price.textContent = `Цена: ${formatPrice(product.price)}`;
-  card.appendChild(price);
+  link.appendChild(price);
 
   // Рейтинг
   if (product.rating) {
     const rating = document.createElement('p');
     rating.classList.add('product-card__rating');
     rating.textContent = `⭐ ${product.rating}`;
-    card.appendChild(rating);
+    link.appendChild(rating);
   }
 
   // Бейдж наличия
@@ -86,9 +92,10 @@ function createProductCard(product) {
     const badge = document.createElement('span');
     badge.classList.add('product-card__badge');
     badge.textContent = 'Нет в наличии';
-    card.appendChild(badge);
+    link.appendChild(badge);
   }
 
+  card.appendChild(link);
   return card;
 }
 
@@ -233,7 +240,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Страница товара (product.html?id=X)
+  function initProductPage() {
+    const params = new URLSearchParams(window.location.search);
+    const productId = parseInt(params.get('id'), 10);
+    if (isNaN(productId)) return false;
+
+    const product = products.find((p) => p.id === productId);
+    if (!product) return false;
+
+    // Заполнение страницы
+    document.title = `${product.title} — Beyond Shop`;
+    document.getElementById('breadcrumb-title').textContent = product.title;
+    document.getElementById('product-title').textContent = product.title;
+    document.getElementById('product-category').textContent = getCategoryLabel(product.category);
+    document.getElementById('product-price').textContent = `Цена: ${formatPrice(product.price)}`;
+    document.getElementById('product-rating').textContent = `⭐ ${product.rating}`;
+    document.getElementById('product-description').textContent = product.description;
+
+    if (product.image) {
+      const img = document.getElementById('product-image');
+      img.src = product.image;
+      img.alt = product.title;
+    }
+
+    const orderBtn = document.getElementById('product-order-btn');
+    if (orderBtn) {
+      orderBtn.dataset.product = product.title;
+    }
+
+    // Сводка для секции JS
+    const summaryEl = document.getElementById('product-output');
+    if (summaryEl) {
+      const summary = createProductSummary(product);
+      summaryEl.textContent = summary;
+    }
+
+    return true;
+  }
+
   waitForProducts(() => {
+    // Страница товара
+    if (initProductPage()) return;
+
     // Каталог товаров
     const container = document.querySelector('[data-products-container]');
     if (container) {
