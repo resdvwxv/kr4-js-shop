@@ -206,8 +206,8 @@ main {
 
 .hero {
   max-width: var(--container-width);
-  margin: var(--space-xl) auto var(--space-xl);
-  padding: var(--space-xl) var(--space-lg);
+  margin: var(--space-md) auto var(--space-md);
+  padding: var(--space-lg) var(--space-md);
   background-color: var(--color-surface-accent);
   background-image: url('../images/witches.webp');
   background-repeat: no-repeat;
@@ -242,8 +242,15 @@ main {
 
 .section {
   max-width: var(--container-width);
-  margin: 0 auto var(--space-xl);
-  padding: 0 var(--space-lg);
+  margin: 0 auto var(--space-md);
+  padding: 0 var(--space-md);
+}
+
+/* --- Заголовки --- */
+
+h1, h2, h3 {
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
 }
 
 /* --- Карточка товара (product-card) --- */
