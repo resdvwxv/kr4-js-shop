@@ -255,6 +255,15 @@ main {
   font-style: italic;
 }
 
+.product-card__category {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .product-card:hover {
   border-color: var(--color-primary);
   box-shadow: 0 4px 12px rgba(0, 87, 184, 0.15);

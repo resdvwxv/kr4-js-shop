@@ -67,6 +67,12 @@ function createProductCard(product, options = {}) {
   title.textContent = product.title;
   link.appendChild(title);
 
+  // Категория
+  const category = document.createElement('p');
+  category.classList.add('product-card__category');
+  category.textContent = getCategoryLabel(product.category);
+  link.appendChild(category);
+
   // Описание
   if (showDescription && product.description) {
     const desc = document.createElement('p');
