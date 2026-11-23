@@ -299,6 +299,7 @@ main {
 .product-card__price {
   margin: 0;
   font-weight: 700;
+  margin-top: auto;
 }
 
 .product-card--discount .product-card__price {
