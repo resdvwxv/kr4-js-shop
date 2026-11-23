@@ -257,69 +257,80 @@ if (feedbackForm && successMessageFeedback) {
   // Проверка наличия массива товаров
   if (typeof products === 'undefined') return;
 
-  // Массив товаров
-  console.log('=== Массив товаров ===');
-  console.log('Всего товаров:', products.length);
-
-  // forEach — перебор
-  console.log('\n=== forEach: все названия ===');
-  products.forEach((p) => console.log(`  ${p.id}. ${p.title}`));
-
-  // map — извлечение названий
-  const titles = products.map((p) => p.title);
-  console.log('\n=== map: массив названий ===');
-  console.log(titles);
-
-  // filter — доступные товары
-  const available = products.filter((p) => p.isAvailable);
-  console.log('\n=== filter: в наличии ===');
-  console.log(`  ${available.length} из ${products.length}`);
-
-  // find — поиск по id
-  const found = products.find((p) => p.id === 5);
-  console.log('\n=== find: товар с id=5 ===');
-  console.log(found);
-
-  // Поиск по названию
-  console.log('\n=== searchProducts: "наушники" ===');
-  const searchResult = searchProducts(products, 'наушники');
-  searchResult.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
-
-  // Фильтрация по категории
-  console.log('\n=== filterProductsByCategory: "electronics" ===');
-  const electronics = filterProductsByCategory(products, 'electronics');
-  electronics.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
-
-  // Сортировка по цене (возрастание)
-  console.log('\n=== sortProductsByPrice: по цене ↑ ===');
-  const sortedAsc = sortProductsByPrice(products, 'asc');
-  sortedAsc.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
-
-  // Сортировка по цене (убывание)
-  console.log('\n=== sortProductsByPrice: по цене ↓ ===');
-  const sortedDesc = sortProductsByPrice(products, 'desc');
-  sortedDesc.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
-
-  // Сортировка по названию
-  console.log('\n=== sortProductsByTitle: по алфавиту ===');
-  const sortedTitle = sortProductsByTitle(products);
-  sortedTitle.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
-
-  // Расчёты
-  console.log('\n=== Расчёты ===');
-  console.log('  В наличии:', countAvailableProducts(products));
-  console.log('  Общая цена:', formatPrice(calculateTotalPrice(products)));
-  console.log('  Средняя цена:', formatPrice(calculateAveragePrice(products)));
-
-  // Комбинирование
-  console.log('\n=== getPreparedProducts: поиск="а", категория="electronics", сортировка=цена↓ ===');
-  const prepared = getPreparedProducts(products, 'а', 'electronics', 'price-desc');
-  prepared.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
-
-  // Вывод на страницу
-  const summaryEl = document.getElementById('product-output');
-  if (summaryEl) {
-    const summary = `Товаров: ${products.length} | В наличии: ${countAvailableProducts(products)} | Общая цена: ${formatPrice(calculateTotalPrice(products))} | Средняя цена: ${formatPrice(calculateAveragePrice(products))}`;
-    summaryEl.textContent = summary;
+  // Ожидание загрузки из JSON
+  function waitForProducts(callback) {
+    if (products.length > 0) {
+      callback();
+    } else {
+      setTimeout(() => waitForProducts(callback), 100);
+    }
   }
+
+  waitForProducts(() => {
+    // Массив товаров
+    console.log('=== Массив товаров ===');
+    console.log('Всего товаров:', products.length);
+
+    // forEach — перебор
+    console.log('\n=== forEach: все названия ===');
+    products.forEach((p) => console.log(`  ${p.id}. ${p.title}`));
+
+    // map — извлечение названий
+    const titles = products.map((p) => p.title);
+    console.log('\n=== map: массив названий ===');
+    console.log(titles);
+
+    // filter — доступные товары
+    const available = products.filter((p) => p.isAvailable);
+    console.log('\n=== filter: в наличии ===');
+    console.log(`  ${available.length} из ${products.length}`);
+
+    // find — поиск по id
+    const found = products.find((p) => p.id === 5);
+    console.log('\n=== find: товар с id=5 ===');
+    console.log(found);
+
+    // Поиск по названию
+    console.log('\n=== searchProducts: "шапец" ===');
+    const searchResult = searchProducts(products, 'шапец');
+    searchResult.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
+
+    // Фильтрация по категории
+    console.log('\n=== filterProductsByCategory: "food" ===');
+    const food = filterProductsByCategory(products, 'food');
+    food.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
+
+    // Сортировка по цене (возрастание)
+    console.log('\n=== sortProductsByPrice: по цене ↑ ===');
+    const sortedAsc = sortProductsByPrice(products, 'asc');
+    sortedAsc.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
+
+    // Сортировка по цене (убывание)
+    console.log('\n=== sortProductsByPrice: по цене ↓ ===');
+    const sortedDesc = sortProductsByPrice(products, 'desc');
+    sortedDesc.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
+
+    // Сортировка по названию
+    console.log('\n=== sortProductsByTitle: по алфавиту ===');
+    const sortedTitle = sortProductsByTitle(products);
+    sortedTitle.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
+
+    // Расчёты
+    console.log('\n=== Расчёты ===');
+    console.log('  В наличии:', countAvailableProducts(products));
+    console.log('  Общая цена:', formatPrice(calculateTotalPrice(products)));
+    console.log('  Средняя цена:', formatPrice(calculateAveragePrice(products)));
+
+    // Комбинирование
+    console.log('\n=== getPreparedProducts: поиск="а", категория="potions", сортировка=цена↓ ===');
+    const prepared = getPreparedProducts(products, 'а', 'potions', 'price-desc');
+    prepared.forEach((p) => console.log(`  ${p.title} — ${formatPrice(p.price)}`));
+
+    // Вывод на страницу
+    const summaryEl = document.getElementById('product-output');
+    if (summaryEl) {
+      const summary = `Товаров: ${products.length} | В наличии: ${countAvailableProducts(products)} | Общая цена: ${formatPrice(calculateTotalPrice(products))} | Средняя цена: ${formatPrice(calculateAveragePrice(products))}`;
+      summaryEl.textContent = summary;
+    }
+  });
 })();

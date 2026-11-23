@@ -10,6 +10,22 @@ const catalogState = {
 };
 
 // ===============================
+// Метка категории
+// ===============================
+
+function getCategoryLabel(category) {
+  const labels = {
+    accessories: 'Аксессуары',
+    electronics: 'Электроника',
+    food: 'Еда и деликатесы',
+    potions: 'Зелья и снадобья',
+    companions: 'Спутники и защита',
+    artifacts: 'Артефакты и снаряжение'
+  };
+  return labels[category] || category;
+}
+
+// ===============================
 // Создание карточки товара
 // ===============================
 
@@ -18,31 +34,43 @@ function createProductCard(product) {
   card.classList.add('product-card');
   card.dataset.productId = product.id;
 
+  // Бейдж (Хит / Новинка / Скидка)
+  if (product.badge) {
+    const badge = document.createElement('span');
+    badge.classList.add('product-card__badge');
+    badge.textContent = product.badge;
+    card.prepend(badge);
+  }
+
+  // Изображение
+  if (product.image) {
+    const img = document.createElement('img');
+    img.classList.add('product-card__image');
+    img.src = product.image;
+    img.alt = product.title;
+    img.loading = 'lazy';
+    card.appendChild(img);
+  }
+
   // Название
   const title = document.createElement('h3');
   title.classList.add('product-card__title');
   title.textContent = product.title;
+  card.appendChild(title);
 
   // Описание
-  const description = document.createElement('p');
-  description.classList.add('product-card__description');
-  description.textContent = product.isAvailable
-    ? `Категория: ${getCategoryLabel(product.category)}. Цена: ${formatPrice(product.price)}.`
-    : `Категория: ${getCategoryLabel(product.category)}. Нет в наличии.`;
+  if (product.description) {
+    const description = document.createElement('p');
+    description.classList.add('product-card__description');
+    description.textContent = product.description;
+    card.appendChild(description);
+  }
 
   // Цена
   const price = document.createElement('p');
   price.classList.add('product-card__price');
   price.textContent = `Цена: ${formatPrice(product.price)}`;
-
-  // Бейдж наличия
-  if (!product.isAvailable) {
-    card.classList.add('product-card--unavailable');
-    const badge = document.createElement('span');
-    badge.classList.add('product-card__badge');
-    badge.textContent = 'Нет в наличии';
-    card.prepend(badge);
-  }
+  card.appendChild(price);
 
   // Рейтинг
   if (product.rating) {
@@ -52,21 +80,16 @@ function createProductCard(product) {
     card.appendChild(rating);
   }
 
-  card.append(title, description, price);
+  // Бейдж наличия
+  if (!product.isAvailable) {
+    card.classList.add('product-card--unavailable');
+    const badge = document.createElement('span');
+    badge.classList.add('product-card__badge');
+    badge.textContent = 'Нет в наличии';
+    card.appendChild(badge);
+  }
+
   return card;
-}
-
-// ===============================
-// Метка категории
-// ===============================
-
-function getCategoryLabel(category) {
-  const labels = {
-    kitchen: 'Кухня',
-    electronics: 'Электроника',
-    accessories: 'Аксессуары'
-  };
-  return labels[category] || category;
 }
 
 // ===============================
@@ -96,6 +119,23 @@ function renderProducts(productsToRender) {
 
   // Создание карточек
   productsToRender.forEach((product) => {
+    const card = createProductCard(product);
+    container.append(card);
+  });
+}
+
+// ===============================
+// Рендер популярных товаров (для index.html)
+// ===============================
+
+function renderPopularProducts(count) {
+  const container = document.querySelector('[data-popular-container]');
+  if (!container) return;
+
+  // Берём первые N товаров
+  const popular = products.slice(0, count || 3);
+
+  popular.forEach((product) => {
     const card = createProductCard(product);
     container.append(card);
   });
@@ -184,9 +224,26 @@ document.addEventListener('DOMContentLoaded', () => {
   initCatalogEvents();
   initCardDelegation();
 
-  // Первый рендер
-  const container = document.querySelector('[data-products-container]');
-  if (container) {
-    updateCatalog();
+  // Ожидание загрузки товаров из JSON
+  function waitForProducts(callback) {
+    if (products.length > 0) {
+      callback();
+    } else {
+      setTimeout(() => waitForProducts(callback), 100);
+    }
   }
+
+  waitForProducts(() => {
+    // Каталог товаров
+    const container = document.querySelector('[data-products-container]');
+    if (container) {
+      updateCatalog();
+    }
+
+    // Популярные товары (главная)
+    const popularContainer = document.querySelector('[data-popular-container]');
+    if (popularContainer) {
+      renderPopularProducts(3);
+    }
+  });
 });

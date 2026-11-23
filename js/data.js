@@ -4,39 +4,36 @@
 
 const product = {
   id: 1,
-  title: 'Кофемашина Barista Home',
-  category: 'kitchen',
-  price: 19990,
-  discountPercent: 10,
-  rating: 4.7,
+  title: 'Шапец',
+  category: 'accessories',
+  price: 5000,
+  discountPercent: 0,
+  rating: 4.9,
   isAvailable: true
 };
 
 // ===============================
-// Массив товаров (Практика 16)
+// Массив товаров — загрузка из JSON (Практика 16)
 // ===============================
 
-const products = [
-  { id: 1, title: 'Кофемашина Barista Home', category: 'kitchen', price: 19990, discountPercent: 10, rating: 4.7, isAvailable: true },
-  { id: 2, title: 'Электрический чайник SmartHeat', category: 'kitchen', price: 4990, discountPercent: 0, rating: 4.3, isAvailable: true },
-  { id: 3, title: 'Блендер MixPro', category: 'kitchen', price: 3990, discountPercent: 15, rating: 4.5, isAvailable: true },
-  { id: 4, title: 'Тостер CrispMaster', category: 'kitchen', price: 2490, discountPercent: 0, rating: 4.1, isAvailable: false },
-  { id: 5, title: 'Наушники SoundMax Pro', category: 'electronics', price: 8990, discountPercent: 20, rating: 4.8, isAvailable: true },
-  { id: 6, title: 'Клавиатура KeyForce RGB', category: 'electronics', price: 5490, discountPercent: 5, rating: 4.4, isAvailable: true },
-  { id: 7, title: 'Мышь ClickElite', category: 'electronics', price: 2990, discountPercent: 0, rating: 4.2, isAvailable: true },
-  { id: 8, title: 'Монитор ViewWide 27"', category: 'electronics', price: 24990, discountPercent: 10, rating: 4.6, isAvailable: true },
-  { id: 9, title: 'Рюкзак UrbanPack', category: 'accessories', price: 3490, discountPercent: 0, rating: 4.3, isAvailable: true },
-  { id: 10, title: 'Чехол для ноутбука', category: 'accessories', price: 1990, discountPercent: 0, rating: 4.0, isAvailable: true },
-  { id: 11, title: 'Подставка для ноутбука', category: 'accessories', price: 2790, discountPercent: 10, rating: 4.5, isAvailable: false },
-  { id: 12, title: 'LED-лампа DeskLight', category: 'accessories', price: 1490, discountPercent: 0, rating: 4.1, isAvailable: true }
-];
+let products = [];
+
+fetch('js/products.json')
+  .then((response) => response.json())
+  .then((data) => {
+    products = data;
+    console.log('Товары загружены:', products.length);
+  })
+  .catch(() => {
+    console.error('Не удалось загрузить товары');
+  });
 
 // ===============================
 // Функции обработки данных (Практика 15)
 // ===============================
 
 function formatPrice(price) {
-  return `${price} руб.`;
+  return `${price} кукичей`;
 }
 
 function calculateDiscount(price, discountPercent) {

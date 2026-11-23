@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Шапец",
+    "category": "accessories",
+    "price": 5000,
+    "discountPercent": 0,
+    "rating": 4.9,
+    "isAvailable": true,
+    "description": "Больше чем просто головной убор — абсолютный символ стиля и статуса в Сумеречной роще.",
+    "image": "images/Shapec.png",
+    "badge": "Хит"
+  },
+  {
+    "id": 2,
+    "title": "Битубизес",
+    "category": "electronics",
+    "price": 2500,
+    "discountPercent": 0,
+    "rating": 4.5,
+    "isAvailable": true,
+    "description": "Зазеркальный маркер надежности и личной эффективности. Создаётся Большим Алмазом Inc.",
+    "image": "images/Bitubisas.png"
+  },
+  {
+    "id": 3,
+    "title": "Морковные пятки",
+    "category": "food",
+    "price": 800,
+    "discountPercent": 0,
+    "rating": 4.2,
+    "isAvailable": true,
+    "description": "Изысканное зазеркальное блюдо: нежные плоды с огорода бабы Жули. При сборе издают хохот.",
+    "image": "images/Morkovniy_piatky.png",
+    "badge": "Новинка"
+  },
+  {
+    "id": 4,
+    "title": "Алмазные соленья от Дядюшки Фантасмогора",
+    "category": "food",
+    "price": 150,
+    "discountPercent": 0,
+    "rating": 4.9,
+    "isAvailable": true,
+    "description": "Изысканный деликатес высшей пробы для истинных эстетов и «сыворотки общества». Поставляется в герметичной банке с фирменной гравировкой.",
+    "image": "images/diamond_pickles.png"
+  },
+  {
+    "id": 5,
+    "title": "Кашка для запоминания от доктора Листа",
+    "category": "potions",
+    "price": 45,
+    "discountPercent": 0,
+    "rating": 4.7,
+    "isAvailable": true,
+    "description": "Авторный ноотропный эликсир, разработанный специально для борьбы с кратковременной памятью. Помогает навсегда запомнить сложные маршруты.",
+    "image": "images/memory_porridge.png"
+  },
+  {
+    "id": 6,
+    "title": "Набор зелий от Вальтасара (3 эффекта)",
+    "category": "potions",
+    "price": 220,
+    "discountPercent": 0,
+    "rating": 4.8,
+    "isAvailable": true,
+    "description": "Легендарные снадобья прямиком из крепости за старым лабиринтом. Три флакона: для распознавания ложных мегунов, иммунитета от ангины ламантинов и предвидения коварных планов.",
+    "image": "images/balthazar_potions.png"
+  },
+  {
+    "id": 7,
+    "title": "Подводный Гоша (в переносном резервуаре)",
+    "category": "companions",
+    "price": 310,
+    "discountPercent": 0,
+    "rating": 5.0,
+    "isAvailable": true,
+    "description": "Незаменимый тактический спутник для опасных вылазок в старый подземный лабиринт. Эффективно отпугивает Многоликого Филиппа и разгоняет Жадность на лайки.",
+    "image": "images/underwater_gosha.png"
+  },
+  {
+    "id": 8,
+    "title": "Древняя маска с острова Лавового озера",
+    "category": "artifacts",
+    "price": 500,
+    "discountPercent": 0,
+    "rating": 4.9,
+    "isAvailable": true,
+    "description": "Редкий защитный артефакт, добытый в самом центре Лавового озера. Обеспечивает надежную защиту от кражи внешности и даёт тактическое преимущество.",
+    "image": "images/lava_lake_mask.png"
+  }
+]
