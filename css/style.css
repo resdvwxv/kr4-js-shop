@@ -418,6 +418,17 @@ main {
   background-color: var(--color-surface);
 }
 
+/* --- Популярные товары (центрирование) --- */
+
+[data-popular-container] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  justify-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
 /* --- Модальное окно (order-dialog) --- */
 
 .order-dialog {

@@ -64,12 +64,12 @@ function createProductCard(product) {
   title.textContent = product.title;
   link.appendChild(title);
 
-  // Краткое описание (для каталога)
-  if (product.shortDescription) {
-    const shortDesc = document.createElement('p');
-    shortDesc.classList.add('product-card__short-desc');
-    shortDesc.textContent = product.shortDescription;
-    link.appendChild(shortDesc);
+  // Описание (полное)
+  if (product.description) {
+    const description = document.createElement('p');
+    description.classList.add('product-card__description');
+    description.textContent = product.description;
+    link.appendChild(description);
   }
 
   // Цена
@@ -139,8 +139,9 @@ function renderPopularProducts(count) {
   const container = document.querySelector('[data-popular-container]');
   if (!container) return;
 
-  // Берём первые N товаров
-  const popular = products.slice(0, count || 3);
+  // Берём 3 случайных товара
+  const shuffled = [...products].sort(() => Math.random() - 0.5);
+  const popular = shuffled.slice(0, count || 3);
 
   popular.forEach((product) => {
     const card = createProductCard(product);
