@@ -29,17 +29,29 @@ kr4-js-shop/
 ## JS-файлы
 
 ### `js/data.js`
-Содержит объект товара (`product`) с полями: `id`, `title`, `category`, `price`, `discountPercent`, `rating`, `isAvailable`.  
-Также содержит функции обработки:
+Содержит объект товара (`product`) и массив товаров (`products`) с полями: `id`, `title`, `category`, `price`, `discountPercent`, `rating`, `isAvailable`.
+
+**Функции Практики 15:**
 - `formatPrice(price)` — форматирование цены с единицей «руб.»
 - `calculateDiscount(price, discountPercent)` — расчёт суммы скидки
 - `calculateFinalPrice(price, discountPercent)` — расчёт итоговой цены
 - `getProductStatus(product)` — определение статуса наличия
 - `createProductSummary(product)` — создание текстовой сводки о товаре
 
+**Функции Практики 16:**
+- `searchProducts(products, query)` — поиск по названию
+- `filterProductsByCategory(products, category)` — фильтрация по категории
+- `sortProductsByPrice(products, direction)` — сортировка по цене (asc/desc)
+- `sortProductsByTitle(products)` — сортировка по названию (А-Я)
+- `countAvailableProducts(products)` — подсчёт доступных товаров
+- `calculateTotalPrice(products)` — общая цена через `reduce`
+- `calculateAveragePrice(products)` — средняя цена
+- `getPreparedProducts(products, query, category, sortDirection)` — комбинирование поиска, фильтра, сортировки
+
 ### `js/main.js`
 Подключает шапку и подвал из `partials/`, управляет модальным окном (`dialog`), обрабатывает формы с валидацией, реализует кнопку «Наверх».  
-На Практике 15 добавлен блок вывода данных товара через `textContent`.
+- **Практика 15** — блок вывода данных товара через `textContent`.
+- **Практика 16** — вывод массива товаров, методов `forEach`, `map`, `filter`, `find`, `sort`, `reduce`, результатов поиска, фильтрации, сортировки и расчётов.
 
 ## Безопасный вывод: `textContent` vs `innerHTML`
 
