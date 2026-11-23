@@ -188,7 +188,7 @@ main {
 
 .breadcrumbs {
   max-width: var(--container-width);
-  margin: 0 auto var(--space-md);
+  margin: 0 auto var(--space-sm);
   font-size: 14px;
   color: var(--color-muted);
 }
@@ -242,7 +242,7 @@ main {
 
 .section {
   max-width: var(--container-width);
-  margin: 0 auto var(--space-md);
+  margin: 0 auto var(--space-sm);
   padding: 0 var(--space-md);
 }
 
@@ -402,7 +402,7 @@ h1, h2, h3 {
 
 .catalog-layout {
   max-width: var(--container-width);
-  margin: 0 auto var(--space-xl);
+  margin: 0 auto var(--space-md);
   display: grid;
   gap: var(--space-lg);
 }
