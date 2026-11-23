@@ -60,12 +60,12 @@ function createProductCard(product) {
   title.textContent = product.title;
   link.appendChild(title);
 
-  // Описание (полное)
-  if (product.description) {
-    const description = document.createElement('p');
-    description.classList.add('product-card__description');
-    description.textContent = product.description;
-    link.appendChild(description);
+  // Краткое описание
+  if (product.shortDescription) {
+    const shortDesc = document.createElement('p');
+    shortDesc.classList.add('product-card__short-desc');
+    shortDesc.textContent = product.shortDescription;
+    link.appendChild(shortDesc);
   }
 
   // Цена
