@@ -211,8 +211,8 @@ main {
   background-color: var(--color-surface-accent);
   background-image: url('../images/witches.webp');
   background-repeat: no-repeat;
-  background-position: right center;
-  background-size: 220px auto;
+  background-position: center;
+  background-size: cover;
   border-radius: var(--radius-lg);
   position: relative;
 }
