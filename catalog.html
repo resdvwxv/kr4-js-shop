@@ -11,6 +11,8 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <script src="js/data.js" defer></script>
     <script src="js/main.js" defer></script>
+    <script src="js/catalog.js" defer></script>
+    <script src="js/validation.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Перейти к основному содержимому</a>
@@ -34,59 +36,32 @@
                 <form class="filters-form" action="#" method="get">
                     <fieldset>
                         <legend>Категория</legend>
-                        <label>
-                            <input type="checkbox" name="category" value="all">
-                            Все товары
-                        </label>
-                        <label>
-                            <input type="checkbox" name="category" value="popular">
-                            Популярные
-                        </label>
-                        <label>
-                            <input type="checkbox" name="category" value="new">
-                            Новинки
-                        </label>
+                        <select id="category-filter" class="filters-form__select">
+                            <option value="all">Все товары</option>
+                            <option value="kitchen">Кухня</option>
+                            <option value="electronics">Электроника</option>
+                            <option value="accessories">Аксессуары</option>
+                        </select>
                     </fieldset>
                     <fieldset>
-                        <legend>Цена</legend>
-                        <label for="price-from">От</label>
-                        <input class="filters-form__input" id="price-from" name="price-from" type="number" min="0" placeholder="0">
-                        <label for="price-to">До</label>
-                        <input class="filters-form__input" id="price-to" name="price-to" type="number" min="0" placeholder="5000">
+                        <legend>Сортировка</legend>
+                        <select id="sort-select" class="filters-form__select">
+                            <option value="default">По умолчанию</option>
+                            <option value="price-asc">Цена: по возрастанию</option>
+                            <option value="price-desc">Цена: по убыванию</option>
+                            <option value="title">По названию</option>
+                        </select>
                     </fieldset>
-                    <button class="button button--primary" type="submit">Применить</button>
                 </form>
             </aside>
             <section class="catalog-products">
                 <h2>Список товаров</h2>
-                <div class="products-grid">
-                    <article class="product-card product-card--discount">
-                        <a href="products/shapets.html" aria-label="Шапец — 5 000 руб.">
-                            <span class="product-card__badge">Хит</span>
-                            <img class="product-card__image" src="images/Shapec.png" srcset="images/Shapec.png 480w, images/Shapec.png 640w, images/Shapec.png 960w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" alt="Шапец — головной убор статуса" width="640" height="480" loading="lazy">
-                            <h3 class="product-card__title">Шапец</h3>
-                            <p class="product-card__description">Больше чем просто головной убор — абсолютный символ стиля и статуса в Сумеречной роще.</p>
-                            <p class="product-card__price">Цена: 5 000 руб.</p>
-                        </a>
-                    </article>
-                    <article class="product-card product-card--featured">
-                        <a href="products/bitubisas.html" aria-label="Битубизес — 2 500 руб.">
-                            <img class="product-card__image" src="images/Bitubisas.png" srcset="images/Bitubisas.png 480w, images/Bitubisas.png 640w, images/Bitubisas.png 960w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" alt="Битубизес — цифровая лицензия" width="640" height="480" loading="lazy">
-                            <h3 class="product-card__title">Битубизес</h3>
-                            <p class="product-card__description">Зазеркальный маркер надежности и личной эффективности. Создаётся Большим Алмазом Inc.</p>
-                            <p class="product-card__price">Цена: 2 500 руб.</p>
-                        </a>
-                    </article>
-                    <article class="product-card product-card--discount">
-                        <a href="products/morkovnye-piatki.html" aria-label="Морковные пятки — 800 руб.">
-                            <span class="product-card__badge">Новинка</span>
-                            <img class="product-card__image" src="images/Morkovniy_piatky.png" srcset="images/Morkovniy_piatky.png 480w, images/Morkovniy_piatky.png 640w, images/Morkovniy_piatky.png 960w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" alt="Морковные пятки — гастрономическое открытие" width="640" height="480" loading="lazy">
-                            <h3 class="product-card__title">Морковные пятки</h3>
-                            <p class="product-card__description">Изысканное зазеркальное блюдо: нежные плоды с огорода бабы Жули. При сборе издают хохот.</p>
-                            <p class="product-card__price">Цена: 800 руб.</p>
-                        </a>
-                    </article>
+                <div class="catalog-toolbar">
+                    <input class="catalog-search" id="catalog-search" type="search" placeholder="Поиск по названию..." aria-label="Поиск по названию">
+                    <p class="catalog-count"></p>
                 </div>
+                <div class="products-grid" data-products-container></div>
+                <p class="catalog-empty" hidden>Товары не найдены. Попробуйте изменить параметры поиска.</p>
             </section>
         </section>
         <section class="section" id="js-output">

@@ -17,6 +17,8 @@ kr4-js-shop/
 ├── js/
 │   ├── data.js        — объект товара, массив товаров, функции обработки
 │   ├── main.js        — общая инициализация, DOM-манипуляции, события
+│   ├── catalog.js     — рендер каталога, поиск, фильтрация, сортировка
+│   └── validation.js  — базовая валидация форм
 ├── images/
 ├── partials/
 │   ├── header.html
@@ -53,6 +55,23 @@ kr4-js-shop/
 - **Практика 15** — блок вывода данных товара через `textContent`.
 - **Практика 16** — вывод массива товаров, методов `forEach`, `map`, `filter`, `find`, `sort`, `reduce`, результатов поиска, фильтрации, сортировки и расчётов.
 
+### `js/catalog.js`
+**Практика 17** — рендер каталога через DOM:
+- `createProductCard(product)` — создание карточки через `createElement`, `classList`, `textContent`, `dataset`
+- `renderProducts(productsToRender)` — очистка контейнера, создание карточек, счётчик, пустое состояние
+- `updateCatalog()` — получение подготовленных данных, вызов `renderProducts`
+- Обработчики `input` (поиск), `change` (фильтр, сортировка) через `addEventListener`
+- Делегирование событий на контейнере карточек
+- `catalogState` — состояние каталога (query, category, sort)
+
+### `js/validation.js`
+**Практика 17** — валидация форм:
+- `showError(input, message)` — вывод ошибки через `textContent`, `aria-invalid`
+- `clearError(input)` — удаление ошибки
+- `validateRequired`, `validateEmail`, `validatePhone`, `validateCheckbox` — проверка полей
+- Валидация формы в модальном окне, на `order.html`, на `contacts.html`
+- Ошибки выводятся на страницу, не через `alert()`
+
 ## Безопасный вывод: `textContent` vs `innerHTML`
 
 | Метод | Поведение | Безопасность |
@@ -83,6 +102,8 @@ element.textContent = userInput;
 ```html
 <script src="js/data.js" defer></script>
 <script src="js/main.js" defer></script>
+<script src="js/catalog.js" defer></script>
+<script src="js/validation.js" defer></script>
 ```
 
-Порядок важен: `data.js` подключается до `main.js`.
+Порядок важен: `data.js` подключается первым — он содержит данные и функции, которые используют остальные файлы.
