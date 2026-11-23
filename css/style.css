@@ -209,6 +209,10 @@ main {
   margin: var(--space-xl) auto var(--space-xl);
   padding: var(--space-xl) var(--space-lg);
   background-color: var(--color-surface-accent);
+  background-image: url('../images/witches.webp');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 220px auto;
   border-radius: var(--radius-lg);
 }
 
