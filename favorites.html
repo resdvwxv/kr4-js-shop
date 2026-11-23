@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Избранные товары учебного интернет-магазина.">
+    <title>Избранное — Beyond Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script src="js/data.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/catalog.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+    <div id="header-placeholder"></div>
+    <main id="main">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a class="breadcrumbs__link" href="index.html">Главная</a>
+            <span class="breadcrumbs__current">Избранное</span>
+        </nav>
+
+        <section class="section">
+            <h1>Избранное</h1>
+        </section>
+
+        <section class="section">
+            <div class="products-grid" data-favorites-container></div>
+            <p class="catalog-empty" id="favorites-empty" hidden>В избранном пока нет товаров</p>
+        </section>
+    </main>
+    <a class="scroll-top" href="#main" aria-label="Наверх">↑</a>
+
+    <div id="footer-placeholder"></div>
+</body>
+</html>

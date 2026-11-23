@@ -6,6 +6,35 @@ const catalogState = {
 };
 
 // ===============================
+// Избранное (localStorage)
+// ===============================
+
+const FAV_KEY = 'favorites';
+
+function getFavorites() {
+  try {
+    return JSON.parse(localStorage.getItem(FAV_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function isFavorite(productId) {
+  return getFavorites().includes(productId);
+}
+
+function toggleFavorite(productId) {
+  let favs = getFavorites();
+  const idx = favs.indexOf(productId);
+  if (idx === -1) {
+    favs.push(productId);
+  } else {
+    favs.splice(idx, 1);
+  }
+  localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+}
+
+// ===============================
 // Метка категории
 // ===============================
 
@@ -92,6 +121,29 @@ function createProductCard(product) {
   }
 
   card.appendChild(link);
+
+  // Кнопка «В избранное»
+  const favBtn = document.createElement('button');
+  favBtn.classList.add('product-card__fav-btn');
+  favBtn.type = 'button';
+  favBtn.setAttribute('aria-label', `Добавить в избранное: ${product.title}`);
+  favBtn.innerHTML = '♡';
+  if (isFavorite(product.id)) {
+    favBtn.classList.add('product-card__fav-btn--active');
+    favBtn.innerHTML = '♥';
+  }
+  favBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorite(product.id);
+    favBtn.classList.toggle('product-card__fav-btn--active');
+    favBtn.innerHTML = isFavorite(product.id) ? '♥' : '♡';
+    favBtn.setAttribute('aria-label', isFavorite(product.id)
+      ? `Убрать из избранного: ${product.title}`
+      : `Добавить в избранное: ${product.title}`);
+  });
+  card.appendChild(favBtn);
+
   return card;
 }
 
@@ -140,6 +192,29 @@ function renderPopularProducts(count) {
   const popular = shuffled.slice(0, count || 3);
 
   popular.forEach((product) => {
+    const card = createProductCard(product);
+    container.append(card);
+  });
+}
+
+// ===============================
+// Рендер избранного (для favorites.html)
+// ===============================
+
+function renderFavorites() {
+  const container = document.querySelector('[data-favorites-container]');
+  const emptyEl = document.getElementById('favorites-empty');
+  if (!container) return;
+
+  const favIds = getFavorites();
+  const favProducts = products.filter((p) => favIds.includes(p.id));
+
+  container.textContent = '';
+  if (emptyEl) {
+    emptyEl.hidden = favProducts.length > 0;
+  }
+
+  favProducts.forEach((product) => {
     const card = createProductCard(product);
     container.append(card);
   });
@@ -287,6 +362,13 @@ document.addEventListener('DOMContentLoaded', () => {
   waitForProducts(() => {
     // Страница товара
     if (initProductPage()) return;
+
+    // Страница избранного
+    const favContainer = document.querySelector('[data-favorites-container]');
+    if (favContainer) {
+      renderFavorites();
+      return;
+    }
 
     // Каталог товаров
     const container = document.querySelector('[data-products-container]');
