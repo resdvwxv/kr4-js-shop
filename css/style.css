@@ -214,6 +214,20 @@ main {
   background-position: right center;
   background-size: 220px auto;
   border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(238, 245, 255, 0.85);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
 }
 
 /* --- Секции (section) --- */
