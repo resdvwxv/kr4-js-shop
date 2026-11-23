@@ -1,0 +1,491 @@
+/* =============================================
+   Адаптивные стили для контрольной работы №3
+   Подход: Mobile First
+   Базовые стили рассчитаны на мобильный экран.
+   Расширения добавляются через min-width медиазапросы.
+   ============================================= */
+
+/* --- Skip-link: ссылка пропуска к основному содержимому --- */
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 1000;
+  padding: 8px 12px;
+  color: #ffffff;
+  background-color: #111111;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 16px;
+}
+
+/* --- Глобальный видимый фокус --- */
+
+*:focus-visible {
+  outline: 3px solid var(--color-primary, #0057b8);
+  outline-offset: 3px;
+}
+
+/* --- Базовые адаптивные правила --- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* --- Адаптивные контейнеры и секции --- */
+
+.container,
+.main,
+.section {
+  width: min(100% - 32px, 1200px);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(24px, 5vw, 64px);
+}
+
+/* --- Адаптивная навигация --- */
+
+.site-nav__list {
+  flex-direction: column;
+  gap: var(--space-sm, 8px);
+  align-items: stretch;
+}
+
+.site-nav__link {
+  display: block;
+  padding: 12px 16px;
+  text-align: center;
+}
+
+/* --- Sticky-навигация: включена везде --- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* --- Мобильное бургер-меню --- */
+
+.site-nav {
+  display: none;
+  width: 100%;
+}
+
+.site-nav--open {
+  display: block;
+}
+
+.site-nav__list {
+  flex-direction: column;
+  gap: var(--space-sm, 8px);
+  align-items: stretch;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-sm);
+}
+
+/* Кнопка бургер-меню */
+
+.burger-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm, 6px);
+}
+
+.burger-btn:hover {
+  background-color: var(--color-surface-accent, #eef5ff);
+}
+
+.burger-btn__bar {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+/* Показываем бургер на мобильных, скрываем на десктопе */
+
+@media (min-width: 768px) {
+  .burger-btn {
+    display: none;
+  }
+
+  .site-header__inner {
+    justify-content: space-between;
+  }
+
+  .site-nav {
+    display: block;
+  }
+
+  .site-nav__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    padding-top: 0;
+  }
+}
+
+/* --- Адаптивный hero-блок --- */
+
+.hero {
+  width: min(100% - 32px, 1100px);
+  padding: var(--space-lg) var(--space-md);
+  margin-inline: auto;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.hero__title {
+  font-size: clamp(28px, 7vw, 56px);
+  line-height: 1.1;
+  margin-top: 0;
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+/* --- Адаптивные изображения (picture для hero) --- */
+
+.hero__image {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+  display: block;
+  border-radius: var(--radius-md, 8px);
+}
+
+/* --- Адаптивная сетка карточек товаров (Mobile First) --- */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md, 16px);
+}
+
+.product-card {
+  min-width: 0;
+}
+
+.product-card__title,
+.product-card__description {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* --- Адаптивные изображения карточек --- */
+
+.product-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md, 8px);
+}
+
+/* --- Планшет: 2 колонки --- */
+
+@media (min-width: 640px) {
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero__actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* --- Десктоп: 3 колонки --- */
+
+@media (min-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding: var(--space-xl) var(--space-lg);
+  }
+}
+
+/* --- Широкий десктоп: 4 колонки --- */
+
+@media (min-width: 1280px) {
+  .products-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* --- Адаптивная страница каталога --- */
+
+.catalog-layout {
+  width: min(100% - 32px, 1100px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg, 24px);
+  margin: 0 auto var(--space-xl);
+}
+
+/*.catalog-filters {
+}*/
+
+@media (min-width: 800px) {
+  .catalog-layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .catalog-filters {
+    order: initial;
+    position: sticky;
+    top: 88px;
+  }
+}
+
+/* --- Адаптивная форма заявки (Mobile First) --- */
+
+.order-form {
+  display: grid;
+  gap: var(--space-md, 16px);
+}
+
+.order-form__field {
+  margin-bottom: 0;
+}
+
+.order-form__input,
+.order-form__textarea,
+.order-form__select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.order-form__textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.order-form__field--checkbox label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  cursor: pointer;
+}
+
+.order-form__field--checkbox input[type="checkbox"] {
+  margin-top: 4px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.order-form__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .order-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .order-form__field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .order-form__actions {
+    flex-direction: row;
+  }
+}
+
+/* --- Адаптивная таблица характеристик --- */
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+}
+
+/* --- Адаптивная форма обратной связи --- */
+
+.feedback-form {
+  display: grid;
+  gap: var(--space-md, 16px);
+}
+
+.feedback-form__field {
+  margin-bottom: 0;
+}
+
+.feedback-form__input,
+.feedback-form__select,
+.feedback-form__textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+@media (min-width: 768px) {
+  .feedback-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feedback-form__field--full {
+    grid-column: 1 / -1;
+  }
+}
+
+/* --- Адаптивное модальное окно --- */
+
+.order-dialog {
+  width: min(100% - 32px, 560px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--space-lg);
+}
+
+/* --- Адаптивная кнопка «Наверх» --- */
+
+.scroll-top {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 44px;
+  height: 44px;
+  z-index: 90;
+}
+
+@media (min-width: 768px) {
+  .scroll-top {
+    right: 32px;
+    bottom: 32px;
+  }
+}
+
+/* --- Адаптивное изображение товара на странице продукта --- */
+
+.product-detail__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.product-detail__image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+@media (min-width: 768px) {
+  .product-detail__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+/* --- Адаптивная карта --- */
+
+.contacts-map__frame {
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 768px) {
+  .contacts-map__frame {
+    height: 400px;
+    aspect-ratio: auto;
+  }
+}
+
+/* --- Адаптивные фильтры --- */
+
+.filters-form fieldset {
+  margin: 0;
+  padding: var(--space-md);
+}
+
+.filters-form legend {
+  font-weight: 700;
+}
+
+.filters-form label {
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.filters-form input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  min-height: 44px;
+}
+
+.filters-form .button {
+  width: 100%;
+  text-align: center;
+  min-height: 44px;
+}
+
+@media (min-width: 768px) {
+  .filters-form .button {
+    width: auto;
+  }
+}

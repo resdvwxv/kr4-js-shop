@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Контактная информация учебного интернет-магазина.">
+    <title>Контакты — Beyond Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+    <div id="header-placeholder"></div>
+    <main id="main">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a class="breadcrumbs__link" href="index.html">Главная</a>
+            <span class="breadcrumbs__current">Контакты</span>
+        </nav>
+        <section class="section">
+            <h1>Контакты</h1>
+            <p>
+                Здесь размещается контактная информация учебного интернет-магазина.
+            </p>
+            <ul>
+                <li>Телефон: +7 (900) 000-00-00</li>
+                <li>E-mail: info@example.com</li>
+                <li>Адрес: г. Москва, учебный проект</li>
+            </ul>
+        </section>
+        <section class="section contacts-map">
+            <h2>Офис</h2>
+                <iframe
+                class="contacts-map__frame"
+                src="https://yandex.ru/map-widget/v1/?ll=37.481276988059506%2C55.66417224900034&z=18.786913"
+                width="100%"
+                height="400"
+                frameborder="0"
+                allowfullscreen
+                loading="lazy"
+                title="Карта: центр Москвы"
+                ></iframe>
+        </section>
+        <section class="section" id="feedback">
+            <h2>Обратная связь</h2>
+            <p>
+                Напишите нам — мы ответим в ближайшее время.
+            </p>
+
+            <form class="feedback-form" id="feedback-form" action="#" method="post" novalidate>
+                <div class="feedback-form__field">
+                    <label class="feedback-form__label" for="feedback-name">Имя *</label>
+                    <input
+                        class="feedback-form__input"
+                        id="feedback-name"
+                        name="name"
+                        type="text"
+                        placeholder="Ваше имя"
+                        minlength="2"
+                        autocomplete="given-name"
+                        required
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="feedback-form__field">
+                    <label class="feedback-form__label" for="feedback-email">E-mail *</label>
+                    <input
+                        class="feedback-form__input"
+                        id="feedback-email"
+                        name="email"
+                        type="email"
+                        placeholder="example@mail.ru"
+                        autocomplete="email"
+                        required
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="feedback-form__field">
+                    <label class="feedback-form__label" for="feedback-topic">Тема обращения</label>
+                    <select class="feedback-form__select" id="feedback-topic" name="topic">
+                        <option value="">Выберите тему</option>
+                        <option value="question">Вопрос по товару</option>
+                        <option value="order">Статус заказа</option>
+                        <option value="return">Возврат / обмен</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+
+                <div class="feedback-form__field">
+                    <label class="feedback-form__label" for="feedback-message">Сообщение *</label>
+                    <textarea
+                        class="feedback-form__textarea"
+                        id="feedback-message"
+                        name="message"
+                        rows="5"
+                        placeholder="Опишите ваш вопрос подробно..."
+                        required
+                        aria-required="true"
+                    ></textarea>
+                </div>
+
+                <div class="feedback-form__field feedback-form__field--checkbox">
+                    <label>
+                        <input
+                            id="feedback-agreement"
+                            name="agreement"
+                            type="checkbox"
+                            required
+                            aria-required="true"
+                        >
+                        Я согласен на обработку персональных данных *
+                    </label>
+                </div>
+
+                <div class="feedback-form__actions">
+                    <button class="button button--primary" type="submit">Отправить сообщение</button>
+                </div>
+            </form>
+
+            <p class="success-message" id="success-message-feedback" hidden>
+                Ваше сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.
+            </p>
+        </section>
+    </main>
+    <a class="scroll-top" href="#main" aria-label="Наверх">↑</a>
+
+    <div id="footer-placeholder"></div>
+</body>
+</html>
