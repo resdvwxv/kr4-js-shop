@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог товаров учебного интернет-магазина.">
+    <title>Каталог — Beyond Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script src="js/data.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+    <div id="header-placeholder"></div>
+    <main id="main">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a class="breadcrumbs__link" href="index.html">Главная</a>
+            <span class="breadcrumbs__current">Каталог</span>
+        </nav>
+        <section class="section">
+            <h1>Каталог товаров</h1>
+            <!--<p>
+                На этой странице представлен учебный каталог товаров.
+                В дальнейшем здесь будут добавлены фильтры, сортировка и более
+                подробные карточки.
+            </p>-->
+        </section>
+        <section class="catalog-layout">
+            <aside class="catalog-filters">
+                <h2>Фильтры</h2>
+                <form class="filters-form" action="#" method="get">
+                    <fieldset>
+                        <legend>Категория</legend>
+                        <label>
+                            <input type="checkbox" name="category" value="all">
+                            Все товары
+                        </label>
+                        <label>
+                            <input type="checkbox" name="category" value="popular">
+                            Популярные
+                        </label>
+                        <label>
+                            <input type="checkbox" name="category" value="new">
+                            Новинки
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Цена</legend>
+                        <label for="price-from">От</label>
+                        <input class="filters-form__input" id="price-from" name="price-from" type="number" min="0" placeholder="0">
+                        <label for="price-to">До</label>
+                        <input class="filters-form__input" id="price-to" name="price-to" type="number" min="0" placeholder="5000">
+                    </fieldset>
+                    <button class="button button--primary" type="submit">Применить</button>
+                </form>
+            </aside>
+            <section class="catalog-products">
+                <h2>Список товаров</h2>
+                <div class="products-grid">
+                    <article class="product-card product-card--discount">
+                        <a href="products/shapets.html" aria-label="Шапец — 5 000 руб.">
+                            <span class="product-card__badge">Хит</span>
+                            <img class="product-card__image" src="images/Shapec.png" srcset="images/Shapec.png 480w, images/Shapec.png 640w, images/Shapec.png 960w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" alt="Шапец — головной убор статуса" width="640" height="480" loading="lazy">
+                            <h3 class="product-card__title">Шапец</h3>
+                            <p class="product-card__description">Больше чем просто головной убор — абсолютный символ стиля и статуса в Сумеречной роще.</p>
+                            <p class="product-card__price">Цена: 5 000 руб.</p>
+                        </a>
+                    </article>
+                    <article class="product-card product-card--featured">
+                        <a href="products/bitubisas.html" aria-label="Битубизес — 2 500 руб.">
+                            <img class="product-card__image" src="images/Bitubisas.png" srcset="images/Bitubisas.png 480w, images/Bitubisas.png 640w, images/Bitubisas.png 960w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" alt="Битубизес — цифровая лицензия" width="640" height="480" loading="lazy">
+                            <h3 class="product-card__title">Битубизес</h3>
+                            <p class="product-card__description">Зазеркальный маркер надежности и личной эффективности. Создаётся Большим Алмазом Inc.</p>
+                            <p class="product-card__price">Цена: 2 500 руб.</p>
+                        </a>
+                    </article>
+                    <article class="product-card product-card--discount">
+                        <a href="products/morkovnye-piatki.html" aria-label="Морковные пятки — 800 руб.">
+                            <span class="product-card__badge">Новинка</span>
+                            <img class="product-card__image" src="images/Morkovniy_piatky.png" srcset="images/Morkovniy_piatky.png 480w, images/Morkovniy_piatky.png 640w, images/Morkovniy_piatky.png 960w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" alt="Морковные пятки — гастрономическое открытие" width="640" height="480" loading="lazy">
+                            <h3 class="product-card__title">Морковные пятки</h3>
+                            <p class="product-card__description">Изысканное зазеркальное блюдо: нежные плоды с огорода бабы Жули. При сборе издают хохот.</p>
+                            <p class="product-card__price">Цена: 800 руб.</p>
+                        </a>
+                    </article>
+                </div>
+            </section>
+        </section>
+        <section class="section" id="js-output">
+            <h2>Результаты JavaScript</h2>
+            <div class="js-training-block">
+                <p id="js-message" class="js-message">Подключение JavaScript...</p>
+                <div class="product-output" id="product-output"></div>
+            </div>
+        </section>
+    </main>
+    <a class="scroll-top" href="#main" aria-label="Наверх">↑</a>
+
+    <div id="footer-placeholder"></div>
+</body>
+</html>
