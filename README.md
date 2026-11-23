@@ -10,41 +10,45 @@
 
 ```
 kr4-js-shop/
-├── index.html, catalog.html, product.html, order.html, contacts.html
+├── index.html, catalog.html, product.html, favorites.html
+│   order.html, contacts.html
 ├── css/
 │   ├── style.css
 │   └── responsive.css
 ├── js/
-│   ├── data.js        — объект товара, массив товаров, функции обработки
-│   ├── main.js        — общая инициализация, DOM-манипуляции, события
-│   ├── catalog.js     — рендер каталога, поиск, фильтрация, сортировка
-│   └── validation.js  — базовая валидация форм
+│   ├── products.json   — массив товаров (источник данных)
+│   ├── data.js         — загрузка JSON, функции обработки
+│   ├── main.js         — общая инициализация, DOM-манипуляции
+│   ├── catalog.js      — рендер каталога, избранное, страница товара
+│   └── validation.js   — базовая валидация форм
 ├── images/
 ├── partials/
 │   ├── header.html
 │   └── footer.html
-├── products/
 ├── README.md
 └── .gitignore
 ```
 
 ## JS-файлы
 
+### `js/products.json`
+Массив из 8 товаров с полями: `id`, `title`, `category`, `price`, `discountPercent`, `rating`, `isAvailable`, `shortDescription`, `description`, `image`, `badge`.
+
 ### `js/data.js`
-Содержит объект товара (`product`) и массив товаров (`products`) с полями: `id`, `title`, `category`, `price`, `discountPercent`, `rating`, `isAvailable`.
+Загружает `products.json` через `fetch`, парсит JSON, предоставляет массив `products`.
 
 **Функции Практики 15:**
-- `formatPrice(price)` — форматирование цены с единицей «руб.»
+- `formatPrice(price)` — форматирование цены с единицей «кукичи»
 - `calculateDiscount(price, discountPercent)` — расчёт суммы скидки
 - `calculateFinalPrice(price, discountPercent)` — расчёт итоговой цены
 - `getProductStatus(product)` — определение статуса наличия
 - `createProductSummary(product)` — создание текстовой сводки о товаре
 
 **Функции Практики 16:**
-- `searchProducts(products, query)` — поиск по названию
+- `searchProducts(products, query)` — поиск по названию (регистронезависимый)
 - `filterProductsByCategory(products, category)` — фильтрация по категории
 - `sortProductsByPrice(products, direction)` — сортировка по цене (asc/desc)
-- `sortProductsByTitle(products)` — сортировка по названию (А-Я)
+- `sortProductsByTitle(products)` — сортировка по названию (А-Я, localeCompare)
 - `countAvailableProducts(products)` — подсчёт доступных товаров
 - `calculateTotalPrice(products)` — общая цена через `reduce`
 - `calculateAveragePrice(products)` — средняя цена
@@ -60,12 +64,20 @@ kr4-js-shop/
 - `createProductCard(product)` — создание карточки через `createElement`, `classList`, `textContent`, `dataset`
 - `renderProducts(productsToRender)` — очистка контейнера, создание карточек, счётчик, пустое состояние
 - `updateCatalog()` — получение подготовленных данных, вызов `renderProducts`
+- `renderPopularProducts(count)` — 3 случайных товара на главной (shuffle + slice)
+- `initProductPage()` — динамическая генерация страницы товара по `?id=`
 - Обработчики `input` (поиск), `change` (фильтр, сортировка) через `addEventListener`
 - Делегирование событий на контейнере карточек
 - `catalogState` — состояние каталога (query, category, sort)
 
-### `js/validation.js`
-**Практика 17** — валидация форм:
+**Избранное (localStorage):**
+- `getFavorites()` — чтение массива ID из `localStorage`
+- `isFavorite(productId)` — проверка наличия товара в избранном
+- `toggleFavorite(productId)` — добавить/убрать из избранного
+- `renderFavorites()` — рендер избранных товаров на `favorites.html`
+- Кнопка ♡/♥ на карточках с переключением состояния
+
+**Валидация:**
 - `showError(input, message)` — вывод ошибки через `textContent`, `aria-invalid`
 - `clearError(input)` — удаление ошибки
 - `validateRequired`, `validateEmail`, `validatePhone`, `validateCheckbox` — проверка полей
@@ -91,9 +103,9 @@ element.textContent = userInput;
 
 ## Практики
 
-- **Практика 15** — подключение скриптов, переменные, типы данных, объект товара, функции расчёта, безопасный вывод через `textContent`.
-- **Практика 16** — массив товаров, поиск, фильтрация, сортировка.
-- **Практика 17** — DOM, события, рендер каталога, валидация формы.
+- **Практика 15** — подключение скриптов, переменные, типы данных, загрузка данных из JSON, объект товара, функции расчёта, безопасный вывод через `textContent`.
+- **Практика 16** — массив товаров, поиск, фильтрация, сортировка, расчёты через `reduce`, `map`, `filter`.
+- **Практика 17** — DOM, события, рендер каталога, динамическая страница товара, избранное (localStorage), валидация форм.
 
 ## Подключение скриптов
 
@@ -106,4 +118,4 @@ element.textContent = userInput;
 <script src="js/validation.js" defer></script>
 ```
 
-Порядок важен: `data.js` подключается первым — он содержит данные и функции, которые используют остальные файлы.
+Порядок важен: `data.js` подключается первым — он содержит данные и функции, которые используют остальные файлы. `data.js` загружает `products.json` через `fetch` и предоставляет массив `products` всем остальным модулям.
