@@ -254,6 +254,9 @@ if (feedbackForm && successMessageFeedback) {
 // ===============================
 
 (function initCatalogOutput() {
+  // Проверка наличия массива товаров
+  if (typeof products === 'undefined') return;
+
   // Массив товаров
   console.log('=== Массив товаров ===');
   console.log('Всего товаров:', products.length);
